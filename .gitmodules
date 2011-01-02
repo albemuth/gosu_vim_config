@@ -16,6 +16,3 @@
 [submodule "vim/bundle/snippetsEmu"]
 	path = vim/bundle/snippetsEmu
 	url = https://github.com/vim-scripts/snippetsEmu.git
-[submodule "bundle/snippetsemu-bundles/after/ftplugin"]
-	path = bundle/snippetsemu-bundles/after/ftplugin
-	url = git@github.com:benpjohnson/snippetsEmu-bundles.git
