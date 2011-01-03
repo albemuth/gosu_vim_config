@@ -18,7 +18,7 @@
 	url = https://github.com/vim-scripts/snippetsEmu.git
 [submodule "vim/bundle/snippetsemu-bundles/after/ftplugin"]
 	path = vim/bundle/snippetsemu-bundles/after/ftplugin
-	url = git@github.com:benpjohnson/snippetsEmu-bundles.git
+	url = git://github.com/benpjohnson/snippetsEmu-bundles.git
 [submodule "vim/bundle/FuzzyFinder"]
 	path = vim/bundle/FuzzyFinder
 	url = git://github.com/vim-scripts/FuzzyFinder.git
