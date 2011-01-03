@@ -25,3 +25,9 @@
 [submodule "vim/bundle/L9"]
 	path = vim/bundle/L9
 	url = https://github.com/vim-scripts/L9.git
+[submodule "vim/bundle/matchit"]
+	path = vim/bundle/matchit
+	url = https://github.com/vim-scripts/matchit.zip.git
+[submodule "vim/bundle/MRU"]
+	path = vim/bundle/MRU
+	url = https://github.com/vim-scripts/MRU.git
