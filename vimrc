@@ -65,7 +65,7 @@ nmap <leader>v :tabedit $MYVIMRC<CR>
 
 " =========================
 " plugins
-nmap <leader>t :NERDTree<CR>
+nmap <leader>n :NERDTree<CR>
 
 
 "if has("autocmd")
