@@ -17,10 +17,8 @@ alias gco='git checkout '
 alias gx='gitx --all &'
 alias gk='git log --graph --abbrev-commit --pretty=oneline --decorate'
 source ~/lib/git/contrib/completion/git-completion.bash
-#misc
-alias matem='mate app config db lib public spec test vendor/plugins'
-alias phussion-restart='touch tmp/restart.txt ; tail -f log/development.log'
 
+#misc
 alias dotfiles='vim ~/.bash_profile ~/.bashrc ~/.vimrc && source ~/.bash_profile ~/.bashrc ~/.vimrc'
 
 
