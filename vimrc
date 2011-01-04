@@ -31,7 +31,7 @@ set scrolloff=3
 set nu
 
 set t_Co=256
-colo vibrantink 
+colo railscasts 
 
 set ignorecase 
 set smartcase
@@ -42,6 +42,7 @@ set title
 " Highlight search terms...
 set hlsearch
 set incsearch " ...dynamically as they are typed.
+
 
 " Scroll the viewport faster
 nnoremap <C-e> 3<C-e>
@@ -67,7 +68,7 @@ nmap <leader>v :tabedit $MYVIMRC<CR>
 " plugins
 nmap <leader>n :NERDTree<CR>
 
-
-"if has("autocmd")
+" ugly
+"if has("autocmd") 
 "  autocmd VimEnter * NERDTree
 "endif
