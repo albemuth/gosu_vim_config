@@ -26,7 +26,9 @@ set wildmenu
 
 " keep more context when cursor moves outside of viewport
 set scrolloff=3
-
+set tabstop=4
+set shiftwidth=4
+"set expandtab
 
 set nu
 
