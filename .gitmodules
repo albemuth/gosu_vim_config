@@ -31,6 +31,3 @@
 [submodule "vim/bundle/MRU"]
 	path = vim/bundle/MRU
 	url = https://github.com/vim-scripts/MRU.git
-[submodule "vim/bundle/command-t"]
-	path = vim/bundle/command-t
-	url = git://git.wincent.com/command-t.git
