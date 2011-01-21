@@ -1,33 +1,48 @@
 [submodule "vim/bundle/fugitive"]
 	path = vim/bundle/fugitive
-	url = https://github.com/tpope/vim-fugitive.git
+	url = https://github.com/tpope/vim-fugitive
+	ignore = untracked
 [submodule "vim/bundle/coffee-script"]
 	path = vim/bundle/coffee-script
-	url = git://github.com/kchmck/vim-coffee-script.git
+	url = git://github.com/kchmck/vim-coffee-script
+	ignore = untracked
 [submodule "vim/bundle/surround"]
 	path = vim/bundle/surround
-	url = https://github.com/tpope/vim-surround.git
+	url = https://github.com/tpope/vim-surround
+	ignore = untracked
 [submodule "vim/bundle/nerdtree"]
 	path = vim/bundle/nerdtree
-	url = git://github.com/scrooloose/nerdtree.git
+	url = git://github.com/scrooloose/nerdtree
+	ignore = untracked
 [submodule "vim/bundle/nerdcommenter"]
 	path = vim/bundle/nerdcommenter
-	url = git://github.com/scrooloose/nerdcommenter.git
+	url = git://github.com/scrooloose/nerdcommenter
+	ignore = untracked
 [submodule "vim/bundle/snippetsEmu"]
 	path = vim/bundle/snippetsEmu
-	url = https://github.com/vim-scripts/snippetsEmu.git
+	url = https://github.com/vim-scripts/snippetsEmu
+	ignore = untracked
 [submodule "vim/bundle/snippetsemu-bundles/after/ftplugin"]
 	path = vim/bundle/snippetsemu-bundles/after/ftplugin
-	url = git://github.com/benpjohnson/snippetsEmu-bundles.git
+	url = git://github.com/benpjohnson/snippetsEmu-bundles
+	ignore = untracked
 [submodule "vim/bundle/FuzzyFinder"]
 	path = vim/bundle/FuzzyFinder
-	url = git://github.com/vim-scripts/FuzzyFinder.git
+	url = git://github.com/vim-scripts/FuzzyFinder
+	ignore = untracked
 [submodule "vim/bundle/L9"]
 	path = vim/bundle/L9
-	url = https://github.com/vim-scripts/L9.git
+	url = https://github.com/vim-scripts/L9
+	ignore = untracked
 [submodule "vim/bundle/matchit"]
 	path = vim/bundle/matchit
-	url = https://github.com/vim-scripts/matchit.zip.git
+	url = https://github.com/vim-scripts/matchit.zip
+	ignore = untracked
 [submodule "vim/bundle/MRU"]
 	path = vim/bundle/MRU
-	url = https://github.com/vim-scripts/MRU.git
+	url = https://github.com/vim-scripts/MRU
+	ignore = untracked
+[submodule "vim/bundle/command-t"]
+	path = vim/bundle/command-t
+	url = git://git.wincent.com/command-t
+	ignore = untracked

@@ -39,7 +39,7 @@ export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
 
 export PATH=~/lib/android-sdk-mac_86/tools/:$GRAILS_HOME/bin:$GROOVY_HOME/bin:$PATH
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
-export VIM_APP_DIR=/Applications/MacPorts/
+export VIM_APP_DIR=/Applications/
 
 export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
