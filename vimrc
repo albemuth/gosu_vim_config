@@ -19,10 +19,18 @@ if &t_Co > 2 || has("gui_running")
   syntax on
 endif
 
+if has("gui_running")
+    set guioptions=egmrt
+endif
+
+
+set term=xterm
 let mapleader = ","
 set history=1000
 set wildmenu
 
+set laststatus=2 
+set ruler
 
 " keep more context when cursor moves outside of viewport
 set scrolloff=3
@@ -50,6 +58,18 @@ set incsearch " ...dynamically as they are typed.
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
+" change to directory of current file automatically (put in _vimrc)
+" :autocmd BufEnter * lcd %:p:h
+
+
+" Bubble single lines
+nmap <D-K> [e
+nmap <D-J> ]e
+" Bubble multiple lines
+vmap <D-K> [egv
+vmap <D-J> ]egv
+
+
 " Intuitive backspacing in insert mode
 set backspace=indent,eol,start
 
@@ -70,7 +90,4 @@ nmap <leader>v :tabedit $MYVIMRC<CR>
 " plugins
 nmap <leader>n :NERDTree<CR>
 
-" ugly
-"if has("autocmd") 
-"  autocmd VimEnter * NERDTree
-"endif
+
