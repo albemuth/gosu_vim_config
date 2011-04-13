@@ -1,8 +1,15 @@
+set rtp+=~/.vim/vundle.git/ 
+ call vundle#rc()
 
-" Pathogen bundle manager
-" filetype off 
-call pathogen#helptags()
-call pathogen#runtime_append_all_bundles()
+Bundle "git://git.wincent.com/command-t.git"
+Bundle "git://github.com/kchmck/vim-coffee-script"
+Bundle "git://github.com/scrooloose/nerdtree"
+Bundle "git://github.com/scrooloose/nerdcommenter"
+Bundle "git://github.com/tsaleh/vim-matchit.git"
+Bundle "git://github.com/vim-scripts/MRU.git"
+Bundle "git://github.com/tpope/vim-surround.git"
+Bundle "git://github.com/tpope/vim-fugitive.git"
+Bundle "git://github.com/tpope/vim-unimpaired.git"
 
 if has("autocmd")
   " Enable filetype detection
@@ -23,8 +30,8 @@ if has("gui_running")
     set guioptions=egmrt
 endif
 
+	set term=xterm
 
-set term=xterm
 let mapleader = ","
 set history=1000
 set wildmenu
@@ -58,9 +65,6 @@ set incsearch " ...dynamically as they are typed.
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
-" change to directory of current file automatically (put in _vimrc)
-" :autocmd BufEnter * lcd %:p:h
-
 
 " Bubble single lines
 nmap <D-K> [e
@@ -73,11 +77,11 @@ vmap <D-J> ]egv
 " Intuitive backspacing in insert mode
 set backspace=indent,eol,start
 
-" Source the vimrc file after saving it
-if has("autocmd")
-  autocmd bufwritepost .vimrc source $MYVIMRC
-endif
-" edit vimrc
+"" Source the vimrc file after saving it
+"if has("autocmd")
+"  autocmd bufwritepost .vimrc source $MYVIMRC
+"endif
+"" edit vimrc
 nmap <leader>v :tabedit $MYVIMRC<CR>
 
 " go pro!
