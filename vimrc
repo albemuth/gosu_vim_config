@@ -28,9 +28,10 @@ endif
 
 if has("gui_running")
     set guioptions=egmrt
+else	
+	set term=xterm
 endif
 
-	set term=xterm
 
 let mapleader = ","
 set history=1000
