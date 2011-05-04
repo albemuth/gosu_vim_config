@@ -10,6 +10,8 @@ Bundle "git://github.com/vim-scripts/MRU.git"
 Bundle "git://github.com/tpope/vim-surround.git"
 Bundle "git://github.com/tpope/vim-fugitive.git"
 Bundle "git://github.com/tpope/vim-unimpaired.git"
+Bundle "git://github.com/urso/dotrc.git"
+Bundle "git://github.com/msanders/snipmate.vim.git"
 
 if has("autocmd")
   " Enable filetype detection
@@ -78,11 +80,11 @@ vmap <D-J> ]egv
 " Intuitive backspacing in insert mode
 set backspace=indent,eol,start
 
-"" Source the vimrc file after saving it
-"if has("autocmd")
-"  autocmd bufwritepost .vimrc source $MYVIMRC
-"endif
-"" edit vimrc
+" Source the vimrc file after saving it
+" if has("autocmd")
+"   autocmd bufwritepost .vimrc source $MYVIMRC
+" endif
+
 nmap <leader>v :tabedit $MYVIMRC<CR>
 
 " go pro!

@@ -1,12 +1,33 @@
-#Bash aliases
-alias ll='ls -lh'
-alias c='clear'
-alias mroe='more'
-alias pdw='pwd'
+# Path to your oh-my-zsh configuration.
+export ZSH=$HOME/.oh-my-zsh
 
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+export ZSH_THEME="garyblessington"
 
-#screen
-alias s='screen -S `whoami` -T linux -s /bin/bash'
+# Set to this to use case-sensitive completion
+# export CASE_SENSITIVE="true"
+
+# Comment this out to disable weekly auto-update checks
+# export DISABLE_AUTO_UPDATE="true"
+
+# Uncomment following line if you want to disable colors in ls
+# export DISABLE_LS_COLORS="true"
+
+# Uncomment following line if you want to disable autosetting terminal title.
+# export DISABLE_AUTO_TITLE="true"
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Example format: plugins=(rails git textmate ruby lighthouse)
+plugins=(git textmate ruby osx)
+
+source $ZSH/oh-my-zsh.sh
+
+# Customize to your needs...
+
+bindkey "^[[3~" delete-char
 
 
 #GIT aliases
@@ -21,13 +42,12 @@ alias gba='git branch -a'
 alias gco='git checkout '
 alias gx='gitx --all &'
 alias gk='git log --graph --abbrev-commit --pretty=oneline --decorate'
-source ~/lib/git/contrib/completion/git-completion.bash
+#source ~/lib/git/contrib/completion/git-completion.bash
 
 #misc
-alias dotfiles='vim ~/.bash_profile ~/.bashrc ~/.vimrc && source ~/.bash_profile ~/.bashrc ~/.vimrc'
+alias dotfiles='vim ~/.zshrc ~/.vimrc && source ~/.zshrc'
 
 
-# MacPorts Installer addition on 2009-04-26_at_16:06:47: adding an appropriate PATH variable for use with MacPorts.
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/Cellar/python/2.7.1/bin:$PATH
 
 export GRAILS_HOME=~/lib/grails
@@ -45,20 +65,6 @@ export PATH=~/bin:~/lib/android-sdk-mac_86/tools/:$GRAILS_HOME/bin:$GROOVY_HOME/
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
 export VIM_APP_DIR=/Applications/
 
-export CLICOLOR=1
-export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
-
-alias mysql=/usr/local/mysql/bin/mysql
-alias mysqladmin=/usr/local/mysql/bin/mysqladmin
-
-#export PS1="\\w:\$(git branch 2>/dev/null | grep '^*' | colrm 1 2)\$ "
-export PS1="\\h:\\W\$ "
 
 #https://github.com/rupa/z.git
 . /Users/alfredomesen/lib/z/z.sh
-
-
-
-#bindkey "^A" beginning-of-line                    # ctrl-a  
-#bindkey "^E" end-of-line                          # ctrl-e
-
