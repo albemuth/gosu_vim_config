@@ -12,6 +12,7 @@ Bundle "git://github.com/tpope/vim-fugitive.git"
 Bundle "git://github.com/tpope/vim-unimpaired.git"
 Bundle "git://github.com/urso/dotrc.git"
 Bundle "git://github.com/msanders/snipmate.vim.git"
+Bundle "git://github.com/godlygeek/tabular.git"
 
 if has("autocmd")
   " Enable filetype detection
@@ -76,6 +77,12 @@ nmap <D-J> ]e
 vmap <D-K> [egv
 vmap <D-J> ]egv
 
+if exists(":Tabularize")
+  nmap <Leader>a= :Tabularize /=<CR>
+  vmap <Leader>a= :Tabularize /=<CR>
+  nmap <Leader>a: :Tabularize /:\zs<CR>
+  vmap <Leader>a: :Tabularize /:\zs<CR>
+endif
 
 " Intuitive backspacing in insert mode
 set backspace=indent,eol,start
@@ -88,10 +95,10 @@ set backspace=indent,eol,start
 nmap <leader>v :tabedit $MYVIMRC<CR>
 
 " go pro!
-" nnoremap <Left> :echoe "Use h"<CR>
-" nnoremap <Right> :echoe "Use l"<CR>
-" nnoremap <Up> :echoe "Use k"<CR>
-" nnoremap <Down> :echoe "Use j"<CR>
+" nnoremap <Left>  : echoe "Use h"<CR>
+" nnoremap <Right> : echoe "Use l"<CR>
+" nnoremap <Up>    : echoe "Use k"<CR>
+" nnoremap <Down>  : echoe "Use j"<CR>
 
 " =========================
 " plugins
