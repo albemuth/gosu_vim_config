@@ -13,6 +13,8 @@ Bundle "git://github.com/tpope/vim-unimpaired.git"
 Bundle "git://github.com/urso/dotrc.git"
 Bundle "git://github.com/msanders/snipmate.vim.git"
 Bundle "git://github.com/godlygeek/tabular.git"
+Bundle "git://github.com/altercation/vim-colors-solarized.git"
+Bundle "git://github.com/vim-scripts/jade.vim.git"
 
 if has("autocmd")
   " Enable filetype detection
@@ -23,6 +25,9 @@ if has("autocmd")
     \ if line("'\"") > 1 && line("'\"") <= line("$") |
     \   exe "normal! g`\"" |
     \ endif
+  " Set json syntax
+  autocmd BufNewFile,BufRead *.json set ft=javascript
+
 endif
 if &t_Co > 2 || has("gui_running")
   " Enable syntax highlighting
@@ -31,8 +36,12 @@ endif
 
 if has("gui_running")
     set guioptions=egmrt
+	colo railscasts 
+	"set background=light
 else	
 	set term=xterm
+	set t_Co=256
+	colo railscasts 
 endif
 
 
@@ -47,16 +56,11 @@ set ruler
 set scrolloff=3
 set tabstop=4
 set shiftwidth=4
-"set expandtab
+set expandtab
 
 set nu
-
-set t_Co=256
-colo railscasts 
-
 set ignorecase 
 set smartcase
-
 set title
 
 
@@ -71,11 +75,11 @@ nnoremap <C-y> 3<C-y>
 
 
 " Bubble single lines
-nmap <D-K> [e
-nmap <D-J> ]e
+nmap <C-K> [e
+nmap <C-J> ]e
 " Bubble multiple lines
-vmap <D-K> [egv
-vmap <D-J> ]egv
+vmap <C-K> [egv
+vmap <C-J> ]egv
 
 if exists(":Tabularize")
   nmap <Leader>a= :Tabularize /=<CR>
@@ -95,10 +99,10 @@ set backspace=indent,eol,start
 nmap <leader>v :tabedit $MYVIMRC<CR>
 
 " go pro!
-" nnoremap <Left>  : echoe "Use h"<CR>
-" nnoremap <Right> : echoe "Use l"<CR>
-" nnoremap <Up>    : echoe "Use k"<CR>
-" nnoremap <Down>  : echoe "Use j"<CR>
+"nnoremap <Left>  : echoe "Use h"<CR>
+"nnoremap <Right> : echoe "Use l"<CR>
+"nnoremap <Up>    : echoe "Use k"<CR>
+"nnoremap <Down>  : echoe "Use j"<CR>
 
 " =========================
 " plugins
