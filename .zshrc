@@ -1,6 +1,6 @@
 # Path to your oh-my-zsh configuration.
 export ZSH=$HOME/.oh-my-zsh
-
+export CONFIG_DIR=$HOME/lib/gosu_vim_config
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -30,25 +30,9 @@ source $ZSH/oh-my-zsh.sh
 
 bindkey "^[[3~" delete-char
 
-
-#GIT aliases
-alias gst='git status'
-alias gl='git pull'
-alias gp='git push'
-alias gd='git diff'
-alias gc='git commit -v'
-alias gca='git commit -v -a'
-alias gb='git branch'
-alias gba='git branch -a'
-alias gco='git checkout '
-alias gx='gitx --all &'
-alias gk='git log --graph --abbrev-commit --pretty=oneline --decorate'
-#source ~/lib/git/contrib/completion/git-completion.bash
-
-
-#misc
-alias dotfiles='vim ~/.zshrc ~/.vimrc && source ~/.zshrc'
-
+if [ -f $CONFIG_DIR/.aliases ]; then
+    . $CONFIG_DIR/.aliases
+fi
 
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/Cellar/python/2.7.1/bin:$PATH
 
@@ -67,5 +51,5 @@ export PATH=~/bin:~/lib/android-sdk-mac_86/tools/:$GRAILS_HOME/bin:$GROOVY_HOME/
 
 
 #https://github.com/rupa/z.git
-. /Users/alfredomesen/lib/z/z.sh
+#. /Users/alfredomesen/lib/z/z.sh
 
