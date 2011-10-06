@@ -15,6 +15,7 @@ Bundle "git://github.com/msanders/snipmate.vim.git"
 Bundle "git://github.com/godlygeek/tabular.git"
 Bundle "git://github.com/altercation/vim-colors-solarized.git"
 Bundle "git://github.com/vim-scripts/jade.vim.git"
+Bundle "git://github.com/vim-scripts/mru.vim.git"
 
 if has("autocmd")
   " Enable filetype detection
@@ -107,5 +108,6 @@ nmap <leader>v :tabedit $MYVIMRC<CR>
 " =========================
 " plugins
 nmap <leader>n :NERDTree<CR>
+nmap <leader>f :MRU<CR>
 
 
