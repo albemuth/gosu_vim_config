@@ -3,5 +3,7 @@ if [ -f ~/.bashrc ]; then
     . ~/.bashrc
 fi
 
+. /etc/profile
+export REBEL_HOME="$HOME/workspaces/atg-backcountry-ca/lib"
 PATH=$PATH:$HOME/bin
 
