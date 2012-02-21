@@ -2,19 +2,24 @@ set rtp+=~/.vim/vundle.git/
  call vundle#rc()
 
 Bundle "git://git.wincent.com/command-t.git"
-Bundle "git://github.com/kchmck/vim-coffee-script"
-Bundle "git://github.com/scrooloose/nerdtree"
-Bundle "git://github.com/scrooloose/nerdcommenter"
-Bundle "git://github.com/tsaleh/vim-matchit.git"
-Bundle "git://github.com/tpope/vim-surround.git"
-Bundle "git://github.com/tpope/vim-fugitive.git"
-Bundle "git://github.com/tpope/vim-unimpaired.git"
-Bundle "git://github.com/urso/dotrc.git"
-Bundle "git://github.com/msanders/snipmate.vim.git"
-Bundle "git://github.com/godlygeek/tabular.git"
 Bundle "git://github.com/altercation/vim-colors-solarized.git"
-Bundle "git://github.com/vim-scripts/jade.vim.git"
+Bundle "git://github.com/godlygeek/tabular.git"
+Bundle "git://github.com/jelera/vim-javascript-syntax.git"
+Bundle "git://github.com/kchmck/vim-coffee-script"
+Bundle "git://github.com/mattn/zencoding-vim.git"
+Bundle "git://github.com/msanders/snipmate.vim.git"
+Bundle "git://github.com/nathanaelkane/vim-indent-guides.git"
+Bundle "git://github.com/scrooloose/nerdcommenter"
+Bundle "git://github.com/scrooloose/nerdtree"
+Bundle "git://github.com/scrooloose/syntastic.git"
+Bundle "git://github.com/tpope/vim-fugitive.git"
+Bundle "git://github.com/tpope/vim-surround.git"
+Bundle "git://github.com/tpope/vim-unimpaired.git"
+Bundle "git://github.com/tsaleh/vim-matchit.git"
+Bundle "git://github.com/urso/dotrc.git"
+Bundle "git://github.com/vim-scripts/AutoClose.git"
 Bundle "git://github.com/vim-scripts/mru.vim.git"
+Bundle "git://github.com/kien/ctrlp.vim.git"
 
 if has("autocmd")
   " Enable filetype detection
@@ -36,7 +41,7 @@ endif
 
 if has("gui_running")
     set guioptions=egmrt
-	colo railscasts 
+	colo solarized 
 	"set background=light
 else	
 	set term=xterm
@@ -97,16 +102,18 @@ set backspace=indent,eol,start
 " endif
 
 nmap <leader>v :tabedit $MYVIMRC<CR>
-
-" go pro!
-"nnoremap <Left>  : echoe "Use h"<CR>
-"nnoremap <Right> : echoe "Use l"<CR>
-"nnoremap <Up>    : echoe "Use k"<CR>
-"nnoremap <Down>  : echoe "Use j"<CR>
+""nnoremap <Left>  : echoe "Use h"<CR>
+""nnoremap <Right> : echoe "Use l"<CR>
+""nnoremap <Up>    : echoe "Use k"<CR>
+""nnoremap <Down>  : echoe "Use j"<CR>
 
 " =========================
 " plugins
 nmap <leader>n :NERDTree<CR>
 nmap <leader>f :MRU<CR>
+nmap <leader>r :CommandTJump<CR>
 
+" ctrlp.vim folder ignore
+
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,js/*   " for Linux/MacOSX
 
