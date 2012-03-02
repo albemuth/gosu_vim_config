@@ -1,13 +1,19 @@
 set rtp+=~/.vim/vundle.git/ 
  call vundle#rc()
 
+"makes Vundle use `git` instead default `https` when building absolute repo URIs
+let g:vundle_default_git_proto = 'git'
+
+Bundle 'gmarik/vundle'
 Bundle "git://git.wincent.com/command-t.git"
+Bundle "git://github.com/albemuth/snipmate.vim.git"
 Bundle "git://github.com/altercation/vim-colors-solarized.git"
 Bundle "git://github.com/godlygeek/tabular.git"
 Bundle "git://github.com/jelera/vim-javascript-syntax.git"
 Bundle "git://github.com/kchmck/vim-coffee-script"
+Bundle "git://github.com/kien/ctrlp.vim.git"
 Bundle "git://github.com/mattn/zencoding-vim.git"
-Bundle "git://github.com/msanders/snipmate.vim.git"
+Bundle "git://github.com/nanotech/jellybeans.vim.git"
 Bundle "git://github.com/nathanaelkane/vim-indent-guides.git"
 Bundle "git://github.com/scrooloose/nerdcommenter"
 Bundle "git://github.com/scrooloose/nerdtree"
@@ -19,7 +25,6 @@ Bundle "git://github.com/tsaleh/vim-matchit.git"
 Bundle "git://github.com/urso/dotrc.git"
 Bundle "git://github.com/vim-scripts/AutoClose.git"
 Bundle "git://github.com/vim-scripts/mru.vim.git"
-Bundle "git://github.com/kien/ctrlp.vim.git"
 
 if has("autocmd")
   " Enable filetype detection
@@ -42,7 +47,7 @@ endif
 if has("gui_running")
     set guioptions=egmrt
 	colo solarized 
-	"set background=light
+    set background=dark
 else	
 	set term=xterm
 	set t_Co=256
@@ -115,5 +120,4 @@ nmap <leader>r :CommandTJump<CR>
 
 " ctrlp.vim folder ignore
 
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,js/*   " for Linux/MacOSX
-
+set wildignore+=js/*

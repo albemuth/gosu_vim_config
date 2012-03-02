@@ -13,10 +13,6 @@ git clone git://github.com/albemuth/gosu_vim_config.git
 
 cd gosu_vim_config
 
-git submodule init
-
-git submodule update
-
 cd ~
 
 ln -s $GOSU/vim .vim
