@@ -21,7 +21,7 @@ export ZSH_THEME="albemuth"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby osx)
+plugins=(git ruby osx brew)
 
 source $ZSH/oh-my-zsh.sh
 

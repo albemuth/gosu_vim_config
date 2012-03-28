@@ -1,3 +1,4 @@
+alias jtest='rm -rf **/*.class; javac  *.java; java org.junit.runner.JUnitCore'
 
 #GIT aliases
 alias gst='git status'

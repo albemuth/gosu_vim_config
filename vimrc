@@ -17,7 +17,7 @@ Bundle "git://github.com/nanotech/jellybeans.vim.git"
 Bundle "git://github.com/nathanaelkane/vim-indent-guides.git"
 Bundle "git://github.com/scrooloose/nerdcommenter"
 Bundle "git://github.com/scrooloose/nerdtree"
-Bundle "git://github.com/scrooloose/syntastic.git"
+"Bundle "git://github.com/scrooloose/syntastic.git"
 Bundle "git://github.com/tpope/vim-fugitive.git"
 Bundle "git://github.com/tpope/vim-surround.git"
 Bundle "git://github.com/tpope/vim-unimpaired.git"
@@ -25,6 +25,8 @@ Bundle "git://github.com/tsaleh/vim-matchit.git"
 Bundle "git://github.com/urso/dotrc.git"
 Bundle "git://github.com/vim-scripts/AutoClose.git"
 Bundle "git://github.com/vim-scripts/mru.vim.git"
+Bundle "git://github.com/jpalardy/vim-slime.git"
+Bundle "git://github.com/pangloss/vim-javascript.git"
 
 if has("autocmd")
   " Enable filetype detection
@@ -51,9 +53,18 @@ if has("gui_running")
 else	
 	set term=xterm
 	set t_Co=256
-	colo railscasts 
+	colo jellybeans 
 endif
 
+" Reselect visual block after indent:
+vnoremap < <gv 
+vnoremap > >gv 
+
+" Make Y behave like other capitals
+nnoremap Y y$
+
+" Force Saving Files that Require Root Permission
+cmap w!! %!sudo tee > /dev/null %
 
 let mapleader = ","
 set history=1000
@@ -101,6 +112,7 @@ endif
 " Intuitive backspacing in insert mode
 set backspace=indent,eol,start
 
+
 " Source the vimrc file after saving it
 " if has("autocmd")
 "   autocmd bufwritepost .vimrc source $MYVIMRC
@@ -120,4 +132,5 @@ nmap <leader>r :CommandTJump<CR>
 
 " ctrlp.vim folder ignore
 
-set wildignore+=js/*
+"set wildignore+=js/*
+set wildignore+=*.class
