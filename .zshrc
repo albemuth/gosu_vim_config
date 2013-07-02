@@ -5,7 +5,7 @@ export CONFIG_DIR=$HOME/lib/gosu_vim_config
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-export ZSH_THEME="albemuth"
+export ZSH_THEME="robbyrussell"
 
 # Set to this to use case-sensitive completion
 # export CASE_SENSITIVE="true"
@@ -21,10 +21,14 @@ export ZSH_THEME="albemuth"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby osx brew)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
+#function git_prompt_info() {
+  #ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+  #echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$ZSH_THEME_GIT_PROMPT_SUFFIX"
+#}
 # Customize to your needs...
 
 bindkey "^[[3~" delete-char
@@ -37,8 +41,9 @@ if [ -f $CONFIG_DIR/.exports ]; then
     . $CONFIG_DIR/.exports
 fi
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
 
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
 #https://github.com/rupa/z.git
 #. /Users/alfredomesen/lib/z/z.sh

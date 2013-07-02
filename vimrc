@@ -1,32 +1,35 @@
-set rtp+=~/.vim/vundle.git/ 
+set rtp+=~/.vim/bundle/vundle/ 
  call vundle#rc()
 
 "makes Vundle use `git` instead default `https` when building absolute repo URIs
 let g:vundle_default_git_proto = 'git'
 
 Bundle 'gmarik/vundle'
+Bundle 'git://github.com/maksimr/vim-jsbeautify.git'
 Bundle "git://git.wincent.com/command-t.git"
 Bundle "git://github.com/albemuth/snipmate.vim.git"
 Bundle "git://github.com/altercation/vim-colors-solarized.git"
 Bundle "git://github.com/godlygeek/tabular.git"
-Bundle "git://github.com/jelera/vim-javascript-syntax.git"
 Bundle "git://github.com/kchmck/vim-coffee-script"
-Bundle "git://github.com/kien/ctrlp.vim.git"
 Bundle "git://github.com/mattn/zencoding-vim.git"
 Bundle "git://github.com/nanotech/jellybeans.vim.git"
-Bundle "git://github.com/nathanaelkane/vim-indent-guides.git"
 Bundle "git://github.com/scrooloose/nerdcommenter"
-Bundle "git://github.com/scrooloose/nerdtree"
-"Bundle "git://github.com/scrooloose/syntastic.git"
 Bundle "git://github.com/tpope/vim-fugitive.git"
 Bundle "git://github.com/tpope/vim-surround.git"
 Bundle "git://github.com/tpope/vim-unimpaired.git"
+"Bundle "cakebaker/scss-syntax.vim"
+"Bundle "miripiruni/vim-better-css-indent"
+Bundle "git://github.com/cakebaker/scss-syntax.vim.git"
+Bundle "git://github.com/derekwyatt/vim-scala.git"
+"Bundle "git://github.com/wookiehangover/jshint.vim.git"
 Bundle "git://github.com/tsaleh/vim-matchit.git"
 Bundle "git://github.com/urso/dotrc.git"
-Bundle "git://github.com/vim-scripts/AutoClose.git"
+Bundle "git://github.com/kana/vim-smartinput.git"
 Bundle "git://github.com/vim-scripts/mru.vim.git"
 Bundle "git://github.com/jpalardy/vim-slime.git"
-Bundle "git://github.com/pangloss/vim-javascript.git"
+
+" github
+Bundle "pangloss/vim-javascript"
 
 if has("autocmd")
   " Enable filetype detection
@@ -53,12 +56,13 @@ if has("gui_running")
 else	
 	set term=xterm
 	set t_Co=256
-	colo jellybeans 
+	colo solarized 
+    set background=dark
 endif
 
 " Reselect visual block after indent:
-vnoremap < <gv 
-vnoremap > >gv 
+"vnoremap < <gv 
+"vnoremap > >gv 
 
 " Make Y behave like other capitals
 nnoremap Y y$
@@ -76,7 +80,7 @@ set ruler
 " keep more context when cursor moves outside of viewport
 set scrolloff=3
 set tabstop=4
-set shiftwidth=4
+set shiftwidth=2
 set expandtab
 
 set nu
@@ -94,7 +98,8 @@ set incsearch " ...dynamically as they are typed.
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
-
+nmap <leader>p :set paste<CR>
+nmap <leader>P :set nopaste<CR>
 " Bubble single lines
 nmap <C-K> [e
 nmap <C-J> ]e
@@ -114,15 +119,15 @@ set backspace=indent,eol,start
 
 
 " Source the vimrc file after saving it
-" if has("autocmd")
-"   autocmd bufwritepost .vimrc source $MYVIMRC
-" endif
+if has("autocmd")
+    autocmd bufwritepost .vimrc source $MYVIMRC
+endif
 
 nmap <leader>v :tabedit $MYVIMRC<CR>
-""nnoremap <Left>  : echoe "Use h"<CR>
-""nnoremap <Right> : echoe "Use l"<CR>
-""nnoremap <Up>    : echoe "Use k"<CR>
-""nnoremap <Down>  : echoe "Use j"<CR>
+"nnoremap <Left>  : echoe "Use h"<CR>
+"nnoremap <Right> : echoe "Use l"<CR>
+"nnoremap <Up>    : echoe "Use k"<CR>
+"nnoremap <Down>  : echoe "Use j"<CR>
 
 " =========================
 " plugins
@@ -134,3 +139,15 @@ nmap <leader>r :CommandTJump<CR>
 
 "set wildignore+=js/*
 set wildignore+=*.class
+set wildignore+=*.png
+set wildignore+=*.jpg
+set wildignore+=*.gif
+set wildignore+=Store/build/*
+set wildignore+=build/*
+set wildignore+=target/*
+set wildignore+=node_modules/*
+set wildignore+=dist/*
+set wildignore+=app/components/*
+
+let g:slime_target = "tmux"
+
