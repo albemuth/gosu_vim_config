@@ -21,9 +21,10 @@ export ZSH_THEME="robbyrussell"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git grunt)
 
 source $ZSH/oh-my-zsh.sh
+alias sudo='nocorrect sudo'
 
 #function git_prompt_info() {
   #ref=$(git symbolic-ref HEAD 2> /dev/null) || return
@@ -37,14 +38,21 @@ if [ -f $CONFIG_DIR/.aliases ]; then
     . $CONFIG_DIR/.aliases
 fi
 
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 if [ -f $CONFIG_DIR/.exports ]; then
     . $CONFIG_DIR/.exports
 fi
 
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
+export NVM_DIR="/Users/amesen/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+#[[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh  # This loads NVM
 #https://github.com/rupa/z.git
 #. /Users/alfredomesen/lib/z/z.sh
 
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"

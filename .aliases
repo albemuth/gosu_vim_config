@@ -10,15 +10,30 @@ alias gb='git branch'
 alias gba='git branch -a'
 alias gco='git checkout '
 alias gx='gitx --all &'
-alias gk='git log --graph --abbrev-commit --pretty=oneline --decorate'
+alias gch='git cherry-pick'
+#alias gk='git log --graph --abbrev-commit --pretty=oneline --decorate'
+alias gk='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
 alias gno='git show --name-only'
+
+# VIM!
 alias vv='vim `gst -s | grep "^.M" | sed "s/^...//"`'
+alias vc='vim `git show --name-only --no-notes | grep "/"`'
 
 #basic
 alias ll='ls -lh'
 alias screen='screen -U'
+alias pj='prettyjson | less -r'
+alias pjs='prettyjson | strip-ansi | less'
 
 #misc
 alias dotfiles='vim ~/.zshrc $CONFIG_DIR/.aliases $CONFIG_DIR/.exports && source ~/.zshrc'
 alias icurl='curl -A "Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_3_3 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5"'
 alias gcurl='curl -A "Mozilla/5.0 (Linux; U; Android 2.3.6; en-us; Nexus S Build/GRK39F) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"'
+
+
+archiveToIpa()
+{
+    rm Backcountry.ipa ; xcodebuild -exportArchive -exportFormat ipa -archivePath `echo $1 | sed 's/\/Products.*//'` -exportPath ./Backcountry.ipa && open ./Backcountry.ipa
+}
+
+
