@@ -2,6 +2,7 @@ alias jtest='rm -rf **/*.class; javac  *.java; java org.junit.runner.JUnitCore'
 
 #GIT aliases
 alias gst='git status'
+alias gl='git pull'
 alias gp='git pull --rebase'
 alias gd='git diff'
 alias gc='git commit -v'
@@ -23,7 +24,7 @@ alias vc='vim `git show --name-only --no-notes | grep "/"`'
 alias ll='ls -lh'
 alias screen='screen -U'
 alias pj='prettyjson | less -r'
-alias pjs='prettyjson | strip-ansi | less'
+alias pjs='xargs -0 node -e "console.log(JSON.stringify(JSON.parse(process.argv[1]), null, 2))"'
 
 #misc
 alias dotfiles='vim ~/.zshrc $CONFIG_DIR/.aliases $CONFIG_DIR/.exports && source ~/.zshrc'
@@ -36,4 +37,5 @@ archiveToIpa()
     rm Backcountry.ipa ; xcodebuild -exportArchive -exportFormat ipa -archivePath `echo $1 | sed 's/\/Products.*//'` -exportPath ./Backcountry.ipa && open ./Backcountry.ipa
 }
 
+alias octave='octave --no-gui'
 

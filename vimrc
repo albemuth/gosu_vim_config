@@ -34,10 +34,66 @@ Bundle "tpope/vim-sleuth"
 Bundle "vim-scripts/DrawIt"
 "Bundle "vim-scripts/VimClojure"
 Bundle "guns/vim-clojure-static"
-Bundle "walm/jshint.vim"
+"Bundle "scrooloose/syntastic"
 Bundle "wavded/vim-stylus"
 Bundle "tpope/vim-fireplace"
 Bundle "vim-scripts/paredit.vim"
+Bundle "vim-scripts/octave.vim--"
+Bundle "leafgarland/typescript-vim"
+Bundle "jimmyhchan/dustjs.vim"
+Bundle "rking/ag.vim"
+
+
+Bundle "lambdatoast/elm.vim"
+"Plugin 'vim-scripts/indentpython.vim'
+Bundle "MartinLafreniere/vim-PairTools"
+
+
+
+" ================================================================================
+"https://github.com/facebook/reason/tree/master/editorSupport/VimReason
+if executable('ocamlmerlin')
+  " To set the log file and restart:
+  let s:ocamlmerlin=substitute(system('which ocamlmerlin'),'ocamlmerlin\n$','','') . "../share/merlin/vim/"
+  execute "set rtp+=".s:ocamlmerlin
+  let g:syntastic_ocaml_checkers=['merlin']
+endif
+if executable('refmt')
+  let s:reason=substitute(system('which refmt'),'refmt\n$','','') . "../share/reason/editorSupport/VimReason"
+  execute "set rtp+=".s:reason
+  let g:syntastic_reason_checkers=['merlin']
+endif
+
+" Reason Pairtools
+autocmd FileType reason let g:pairtools_reason_pairclamp = 1
+autocmd FileType reason let g:pairtools_reason_tagwrench = 0
+autocmd FileType reason let g:pairtools_reason_jigsaw    = 3
+autocmd FileType reason let g:pairtools_reason_autoclose  = 1
+autocmd FileType reason let g:pairtools_reason_forcepairs = 0
+autocmd FileType reason let g:pairtools_reason_closepairs = "(:),[:],{:}" . ',":"'
+autocmd FileType reason let g:pairtools_reason_smartclose = 1
+autocmd FileType reason let g:pairtools_reason_smartcloserules = '\w,(,&,\*'
+autocmd FileType reason let g:pairtools_reason_antimagic  = 1
+autocmd FileType reason let g:pairtools_reason_antimagicfield  = "Comment,String,Special"
+autocmd FileType reason let g:pairtools_reason_pcexpander = 1
+autocmd FileType reason let g:pairtools_reason_pceraser   = 1
+autocmd FileType reason let g:pairtools_reason_tagwrenchhook = 'tagwrench#BuiltinNoHook'
+autocmd FileType reason let g:pairtools_reason_twexpander = 0
+autocmd FileType reason let g:pairtools_reason_tweraser   = 0
+autocmd FileType reason let g:pairtools_reason_apostrophe = 0
+" Always wrap at 90 columns
+let g:vimreason_extra_args_expr_reason = '"-print-width 90"'
+
+" Wrap at the window width
+let g:vimreason_extra_args_expr_reason = '"-print-width " . ' .  "winwidth('.')"
+
+" Wrap at the window width but not if it exceeds 120 characters.
+let g:vimreason_extra_args_expr_reason = '"-print-width " . ' .  "min([120, winwidth('.')])"
+
+autocmd FileType reason map <buffer> <D-M> :ReasonPrettyPrint<Cr>
+
+" ================================================================================
+" ================================================================================
 
 
 if has("autocmd")
@@ -63,7 +119,7 @@ endif
 if has("gui_running")
   set guioptions=egmrt
   colo solarized
-  set background=dark
+  set background=light
 else
   set term=xterm
   set t_Co=256
@@ -98,8 +154,8 @@ set ruler
 
 " keep more context when cursor moves outside of viewport
 set scrolloff=3
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set expandtab
 
 set nu
@@ -167,6 +223,14 @@ let g:jsx_ext_required = 0
 
 " ctrlp.vim folder ignore
 
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 "set wildignore+=js/*
 set wildignore+=*.pyc
 set wildignore+=*.class
@@ -177,6 +241,7 @@ set wildignore+=Store/build/*
 set wildignore+=build/*
 set wildignore+=target/*
 set wildignore+=node_modules/*
+set wildignore+=js-src-instr/*
 set wildignore+=dist/*
 set wildignore+=app/build/*
 set wildignore+=app/bower_components/*
@@ -185,6 +250,28 @@ set wildignore+=coverage/*
 set wildignore+=app/coverage/*
 set wildignore+=Resources/*
 set wildignore+=out/*
+set wildignore+=android/app/build/*
+set wildignore+=www/*
+set wildignore+=platforms/*
+set wildignore+=bundle/*
+set wildignore+=bundle/
+set wildignore+=./bundle/
+set wildignore+=js-src/bundle/*
+set wildignore+=_build/*
+
 
 let g:slime_target = "tmux"
+
+"au BufNewFile,BufRead *.py
+    "\ set tabstop=4
+    "\ set softtabstop=4
+    "\ set shiftwidth=4
+    "\ set textwidth=79
+    "\ set expandtab
+    "\ set autoindent
+    "\ set fileformat=unix
+
+"au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+"set encoding=utf-8
+
 
