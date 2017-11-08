@@ -43,6 +43,8 @@ Bundle "leafgarland/typescript-vim"
 Bundle "jimmyhchan/dustjs.vim"
 Bundle "rking/ag.vim"
 
+Bundle "easymotion/vim-easymotion"
+
 
 Bundle "lambdatoast/elm.vim"
 "Plugin 'vim-scripts/indentpython.vim'
@@ -176,15 +178,9 @@ nnoremap <C-y> 3<C-y>
 nmap <leader>d :set background=light<CR>
 nmap <leader>D :set background=dark<CR>
 
-"Copy & paste to system clipboard with <Leader>p and <Leader>y:
-"nmap <Leader>P "+P
-"nmap <Leader>p "+p
-"vmap <Leader>P "+P
-"vmap <Leader>d "+d
-"vmap <Leader>p "+p
-"vmap <Leader>y "+y
 nmap <leader>p :set paste<CR>
 nmap <leader>P :set nopaste<CR>
+nmap <leader><leader>p :set nopaste<CR>
 " Bubble single lines
 nmap <C-K> [e
 nmap <C-J> ]e
@@ -198,6 +194,12 @@ if exists(":Tabularize")
   nmap <Leader>a: :Tabularize /:\zs<CR>
   vmap <Leader>a: :Tabularize /:\zs<CR>
 endif
+
+" change the default EasyMotion shading to something more readable with
+" Solarized
+hi link EasyMotionTarget ErrorMsg
+hi link EasyMotionShade  Comment
+
 
 " Intuitive backspacing in insert mode
 set backspace=indent,eol,start
@@ -248,7 +250,6 @@ set wildignore+=app/bower_components/*
 set wildignore+=bower_components/*
 set wildignore+=coverage/*
 set wildignore+=app/coverage/*
-set wildignore+=Resources/*
 set wildignore+=out/*
 set wildignore+=android/app/build/*
 set wildignore+=www/*
