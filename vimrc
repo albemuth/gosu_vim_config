@@ -8,13 +8,8 @@ Bundle 'gmarik/vundle'
 Bundle "git://git.wincent.com/command-t.git"
 Bundle "git://github.com/albemuth/snipmate.vim.git"
 Bundle "git://github.com/altercation/vim-colors-solarized.git"
-Bundle "git://github.com/cakebaker/scss-syntax.vim.git"
-Bundle "git://github.com/derekwyatt/vim-scala.git"
 Bundle "git://github.com/godlygeek/tabular.git"
-Bundle "git://github.com/jpalardy/vim-slime.git"
 Bundle "git://github.com/kana/vim-smartinput.git"
-Bundle "git://github.com/kchmck/vim-coffee-script"
-Bundle "git://github.com/nanotech/jellybeans.vim.git"
 Bundle "git://github.com/scrooloose/nerdcommenter"
 Bundle "git://github.com/tpope/vim-fugitive.git"
 Bundle "git://github.com/tpope/vim-surround.git"
@@ -31,68 +26,16 @@ Bundle "mxw/vim-jsx"
 Bundle "pangloss/vim-javascript"
 Bundle "tommcdo/vim-exchange"
 Bundle "tpope/vim-sleuth"
-Bundle "vim-scripts/DrawIt"
-"Bundle "vim-scripts/VimClojure"
-Bundle "guns/vim-clojure-static"
-"Bundle "scrooloose/syntastic"
-Bundle "wavded/vim-stylus"
-Bundle "tpope/vim-fireplace"
-Bundle "vim-scripts/paredit.vim"
-Bundle "vim-scripts/octave.vim--"
-Bundle "leafgarland/typescript-vim"
-Bundle "jimmyhchan/dustjs.vim"
 Bundle "rking/ag.vim"
+"Bundle "vim-scripts/paredit.vim"
 
 Bundle "easymotion/vim-easymotion"
 
 
-Bundle "lambdatoast/elm.vim"
-"Plugin 'vim-scripts/indentpython.vim'
-Bundle "MartinLafreniere/vim-PairTools"
-
-
-
-" ================================================================================
-"https://github.com/facebook/reason/tree/master/editorSupport/VimReason
-if executable('ocamlmerlin')
-  " To set the log file and restart:
-  let s:ocamlmerlin=substitute(system('which ocamlmerlin'),'ocamlmerlin\n$','','') . "../share/merlin/vim/"
-  execute "set rtp+=".s:ocamlmerlin
-  let g:syntastic_ocaml_checkers=['merlin']
-endif
-if executable('refmt')
-  let s:reason=substitute(system('which refmt'),'refmt\n$','','') . "../share/reason/editorSupport/VimReason"
-  execute "set rtp+=".s:reason
-  let g:syntastic_reason_checkers=['merlin']
-endif
-
-" Reason Pairtools
-autocmd FileType reason let g:pairtools_reason_pairclamp = 1
-autocmd FileType reason let g:pairtools_reason_tagwrench = 0
-autocmd FileType reason let g:pairtools_reason_jigsaw    = 3
-autocmd FileType reason let g:pairtools_reason_autoclose  = 1
-autocmd FileType reason let g:pairtools_reason_forcepairs = 0
-autocmd FileType reason let g:pairtools_reason_closepairs = "(:),[:],{:}" . ',":"'
-autocmd FileType reason let g:pairtools_reason_smartclose = 1
-autocmd FileType reason let g:pairtools_reason_smartcloserules = '\w,(,&,\*'
-autocmd FileType reason let g:pairtools_reason_antimagic  = 1
-autocmd FileType reason let g:pairtools_reason_antimagicfield  = "Comment,String,Special"
-autocmd FileType reason let g:pairtools_reason_pcexpander = 1
-autocmd FileType reason let g:pairtools_reason_pceraser   = 1
-autocmd FileType reason let g:pairtools_reason_tagwrenchhook = 'tagwrench#BuiltinNoHook'
-autocmd FileType reason let g:pairtools_reason_twexpander = 0
-autocmd FileType reason let g:pairtools_reason_tweraser   = 0
-autocmd FileType reason let g:pairtools_reason_apostrophe = 0
-" Always wrap at 90 columns
-let g:vimreason_extra_args_expr_reason = '"-print-width 90"'
-
-" Wrap at the window width
-let g:vimreason_extra_args_expr_reason = '"-print-width " . ' .  "winwidth('.')"
-
-" Wrap at the window width but not if it exceeds 120 characters.
-let g:vimreason_extra_args_expr_reason = '"-print-width " . ' .  "min([120, winwidth('.')])"
-
-autocmd FileType reason map <buffer> <D-M> :ReasonPrettyPrint<Cr>
+Bundle "prettier/vim-prettier"
+Bundle 'octref/RootIgnore'
+Bundle 'sheerun/vim-polyglot'
+Bundle 'dense-analysis/ale'
 
 " ================================================================================
 " ================================================================================
@@ -126,7 +69,7 @@ else
   set term=xterm
   set t_Co=256
   colo solarized
-  set background=light
+  set background=dark
 endif
 
 " Reselect visual block after indent:
@@ -144,7 +87,18 @@ nnoremap Y y$
 " Force Saving Files that Require Root Permission
 cmap w!! %!sudo tee > /dev/null %
 
+
+let g:CommandTAcceptSelectionCommand = 'e'
+let g:CommandTAcceptSelectionSplitCommand = 'sp'
+let g:CommandTAcceptSelectionTabCommand = 'CommandTOpen tabe'
+let g:CommandTAcceptSelectionVSplitCommand = 'vs'
+
+
 let g:CommandTTraverseSCM = 'pwd'
+let g:CommandTWildIgnore = &wildignore . ',myPattern""'
+
+
+
 set backupdir=~/vimswp
 set directory=~/vimswp
 let mapleader = ","
@@ -239,27 +193,9 @@ set wildignore+=*.class
 set wildignore+=*.png
 set wildignore+=*.jpg
 set wildignore+=*.gif
-set wildignore+=Store/build/*
-set wildignore+=build/*
-set wildignore+=target/*
-set wildignore+=node_modules/*
-set wildignore+=js-src-instr/*
-set wildignore+=dist/*
-set wildignore+=app/build/*
-set wildignore+=app/bower_components/*
-set wildignore+=bower_components/*
-set wildignore+=coverage/*
-set wildignore+=app/coverage/*
-set wildignore+=out/*
-set wildignore+=android/app/build/*
-set wildignore+=www/*
-set wildignore+=platforms/*
-set wildignore+=bundle/*
-set wildignore+=bundle/
-set wildignore+=./bundle/
-set wildignore+=js-src/bundle/*
-set wildignore+=_build/*
+set wildignore+=*/node_modules/*  
 
+let g:CommandTWildIgnore=&wildignore . ",*/node_modules"
 
 let g:slime_target = "tmux"
 
@@ -275,4 +211,13 @@ let g:slime_target = "tmux"
 "au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 "set encoding=utf-8
 
+
+" none|es5|all
+" Prettier default: none
+let g:prettier#config#trailing_comma = 'none'
+let g:prettier#config#semi = 'false'
+let g:prettier#config#singleQuote = 'false'
+let g:prettier#config#jsxSingleQuote = 'false'
+
+nmap <leader>f :PrettierAsync<CR>
 
