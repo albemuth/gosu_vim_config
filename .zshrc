@@ -17,7 +17,7 @@ export ZSH_THEME="robbyrussell"
 # export DISABLE_LS_COLORS="true"
 
 # Uncomment following line if you want to disable autosetting terminal title.
- export DISABLE_AUTO_TITLE="true"
+export DISABLE_AUTO_TITLE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -38,7 +38,6 @@ if [ -f $CONFIG_DIR/.aliases ]; then
     . $CONFIG_DIR/.aliases
 fi
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 if [ -f $CONFIG_DIR/.exports ]; then
     . $CONFIG_DIR/.exports
 fi
@@ -47,13 +46,11 @@ if [ -f ~/.profile ]; then
     . ~/.profile
 fi
 
-#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
-#[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
+export EDITOR=vim
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  alias copy='xsel -ib'
+  alias pbpaste='xclip -selection clipboard -o'
+  alias pbcopy='xclip -selection clipboard'
+fi
 
-
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
-#NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
