@@ -5,7 +5,7 @@ export CONFIG_DIR=$HOME/gosu_vim_config
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-export ZSH_THEME="robbyrussell"
+export ZSH_THEME="pygmalion"
 
 # Set to this to use case-sensitive completion
 # export CASE_SENSITIVE="true"
