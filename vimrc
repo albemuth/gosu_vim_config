@@ -68,7 +68,7 @@ if has("gui_running")
 else
   set term=xterm
   set t_Co=256
-  colo solarized
+  colo railscasts
   set background=dark
 endif
 

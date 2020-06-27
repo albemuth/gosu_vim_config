@@ -52,5 +52,6 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   alias copy='xsel -ib'
   alias pbpaste='xclip -selection clipboard -o'
   alias pbcopy='xclip -selection clipboard'
+  /usr/bin/xmodmap ~/.xmodmaprc 2> /dev/null
 fi
 
