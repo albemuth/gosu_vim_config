@@ -36,6 +36,8 @@ Bundle "prettier/vim-prettier"
 Bundle 'octref/RootIgnore'
 Bundle 'sheerun/vim-polyglot'
 Bundle 'dense-analysis/ale'
+Bundle 'psf/black'
+            
 
 " ================================================================================
 " ================================================================================

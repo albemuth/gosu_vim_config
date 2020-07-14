@@ -5,7 +5,7 @@ export CONFIG_DIR=$HOME/gosu_vim_config
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-export ZSH_THEME="pygmalion"
+export ZSH_THEME="robbyrussell"
 
 # Set to this to use case-sensitive completion
 # export CASE_SENSITIVE="true"
@@ -53,5 +53,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   alias pbpaste='xclip -selection clipboard -o'
   alias pbcopy='xclip -selection clipboard'
   /usr/bin/xmodmap ~/.xmodmaprc 2> /dev/null
+  alias python='python3'
+  alias pip='pip3'
 fi
 

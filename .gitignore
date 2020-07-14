@@ -1,4 +1,5 @@
 .exports
 vim/.netrwhist
 vim/bundle/
+vim/black/
 vim/vundle.git/
