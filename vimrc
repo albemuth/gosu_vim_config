@@ -28,15 +28,17 @@ Bundle "tommcdo/vim-exchange"
 Bundle "tpope/vim-sleuth"
 Bundle "rking/ag.vim"
 "Bundle "vim-scripts/paredit.vim"
-
 Bundle "easymotion/vim-easymotion"
-
-
 Bundle "prettier/vim-prettier"
 Bundle 'octref/RootIgnore'
 Bundle 'sheerun/vim-polyglot'
 Bundle 'dense-analysis/ale'
 Bundle 'psf/black'
+
+"colorschemes
+Bundle "arcticicestudio/nord-vim"
+
+
             
 
 " ================================================================================
