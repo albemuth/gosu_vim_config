@@ -16,6 +16,7 @@ Installation:
     ln -s gosu_vim_config/.screenrc .screenrc
     ln -s gosu_vim_config/.xmodmaprc .xmodmaprc
     ln -s gosu_vim_config/i3 .config/i3
+    mkdir ~/vimswp
 
     cp gosu_vim_config/.exports-sample gosu_vim_config/.exports
     
