@@ -16,14 +16,21 @@ Bundle "git://github.com/tpope/vim-surround.git"
 Bundle "git://github.com/tpope/vim-unimpaired.git"
 Bundle "git://github.com/tsaleh/vim-matchit.git"
 Bundle "git://github.com/urso/dotrc.git"
-Bundle 'git://github.com/maksimr/vim-jsbeautify.git'
+
+
+Bundle 'leafgarland/typescript-vim'
+Bundle "pangloss/vim-javascript"
+Bundle 'peitalin/vim-jsx-typescript'
+Bundle 'styled-components/vim-styled-components'
+Bundle 'jparise/vim-graphql'
+Bundle "mxw/vim-jsx"
+Bundle 'neoclide/coc.nvim'
+
 
 " github
 Bundle "digitaltoad/vim-jade.git"
 Bundle "junegunn/fzf"
 Bundle "mattn/emmet-vim"
-Bundle "mxw/vim-jsx"
-Bundle "pangloss/vim-javascript"
 Bundle "tommcdo/vim-exchange"
 Bundle "tpope/vim-sleuth"
 Bundle "rking/ag.vim"
@@ -32,14 +39,19 @@ Bundle "easymotion/vim-easymotion"
 Bundle "prettier/vim-prettier"
 Bundle 'octref/RootIgnore'
 Bundle 'sheerun/vim-polyglot'
-Bundle 'dense-analysis/ale'
+"Bundle 'dense-analysis/ale'
 Bundle 'psf/black'
 
 "colorschemes
 Bundle "arcticicestudio/nord-vim"
 
 
+
+let g:coc_global_extensions = [
+  \ 'coc-tsserver'
+  \ ]
             
+let g:coc_disable_transparent_cursor = 1
 
 " ================================================================================
 " ================================================================================
@@ -72,7 +84,7 @@ if has("gui_running")
 else
   set term=xterm
   set t_Co=256
-  colo railscasts
+  colo solarized
   set background=dark
 endif
 
@@ -178,6 +190,7 @@ nnoremap <Down>  : echoe "Use j"<CR>
 " plugins
 nmap <leader>n :NERDTree<CR>
 nmap <leader>r :CommandTJump<CR>
+nmap <leader>gb :Git blame<CR>
 
 let g:jsx_ext_required = 0
 
@@ -216,12 +229,48 @@ let g:slime_target = "tmux"
 "set encoding=utf-8
 
 
-" none|es5|all
-" Prettier default: none
-let g:prettier#config#trailing_comma = 'none'
-let g:prettier#config#semi = 'false'
-let g:prettier#config#singleQuote = 'false'
-let g:prettier#config#jsxSingleQuote = 'false'
 
 nmap <leader>f :PrettierAsync<CR>
+
+if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
+  let g:coc_global_extensions += ['coc-prettier']
+endif
+
+if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+  let g:coc_global_extensions += ['coc-eslint']
+endif
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <leader>do <Plug>(coc-codeaction)
+nmap <leader>dc :CocCommand<CR>
+inoremap <silent><expr> <C-i> coc#refresh()
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+"inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              "\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+nnoremap <silent> K :call CocAction('doHover')<CR>
+
+
+
+"function! ShowDocIfNoDiagnostic(timer_id)
+  "if (coc#float#has_float() == 0 && CocHasProvider('hover') == 1)
+    "silent call CocActionAsync('doHover')
+  "endif
+"endfunction
+
+"function! s:show_hover_doc()
+  "call timer_start(500, 'ShowDocIfNoDiagnostic')
+"endfunction
+
+"autocmd CursorHoldI * :call <SID>show_hover_doc()
+"autocmd CursorHold * :call <SID>show_hover_doc()
+
+
+
 
