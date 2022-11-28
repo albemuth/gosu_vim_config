@@ -7,6 +7,8 @@ Installation:
 
     cd $HOME
 
+    git config --global url.https://github.com/.insteadOf git://github.com/
+
     git clone git://github.com/albemuth/gosu_vim_config.git
     git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 
