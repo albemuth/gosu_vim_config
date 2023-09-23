@@ -1,4 +1,4 @@
-Albemuth's Gosu Vim Config
+dotfiles
 ==========================
 
 
