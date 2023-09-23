@@ -1,50 +1,39 @@
-set rtp+=~/.vim/bundle/vundle/
- call vundle#rc()
 
-"makes Vundle use `git` instead default `https` when building absolute repo URIs
-let g:vundle_default_git_proto = 'git'
+" https://github.com/junegunn/vim-plug/wiki/tutorial
+" Plugins will be downloaded under the specified directory.
+ call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 
-Bundle 'gmarik/vundle'
-Bundle "git://git.wincent.com/command-t.git"
-Bundle "git://github.com/albemuth/snipmate.vim.git"
-Bundle "git://github.com/altercation/vim-colors-solarized.git"
-Bundle "git://github.com/godlygeek/tabular.git"
-Bundle "git://github.com/kana/vim-smartinput.git"
-Bundle "git://github.com/scrooloose/nerdcommenter"
-Bundle "git://github.com/tpope/vim-fugitive.git"
-Bundle "git://github.com/tpope/vim-surround.git"
-Bundle "git://github.com/tpope/vim-unimpaired.git"
-Bundle "git://github.com/tsaleh/vim-matchit.git"
-Bundle "git://github.com/urso/dotrc.git"
+Plug 'albemuth/snipmate.vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'arcticicestudio/nord-vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'godlygeek/tabular'
+Plug 'jparise/vim-graphql'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/seoul256.vim'
+Plug 'kana/vim-smartinput'
+Plug 'leafgarland/typescript-vim'
+Plug 'mattn/emmet-vim'
+Plug 'mxw/vim-jsx'
+Plug 'neoclide/coc.nvim'
+Plug 'octref/RootIgnore'
+Plug 'pangloss/vim-javascript'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'prettier/vim-prettier'
+Plug 'psf/black'
+Plug 'rking/ag.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'sheerun/vim-polyglot'
+Plug 'styled-components/vim-styled-components'
+Plug 'tommcdo/vim-exchange'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 
-
-Bundle 'leafgarland/typescript-vim'
-Bundle "pangloss/vim-javascript"
-Bundle 'peitalin/vim-jsx-typescript'
-Bundle 'styled-components/vim-styled-components'
-Bundle 'jparise/vim-graphql'
-Bundle "mxw/vim-jsx"
-Bundle 'neoclide/coc.nvim'
-
-
-" github
-Bundle "digitaltoad/vim-jade.git"
-Bundle "junegunn/fzf"
-Bundle "mattn/emmet-vim"
-Bundle "tommcdo/vim-exchange"
-Bundle "tpope/vim-sleuth"
-Bundle "rking/ag.vim"
-"Bundle "vim-scripts/paredit.vim"
-Bundle "easymotion/vim-easymotion"
-Bundle "prettier/vim-prettier"
-Bundle 'octref/RootIgnore'
-Bundle 'sheerun/vim-polyglot'
-"Bundle 'dense-analysis/ale'
-Bundle 'psf/black'
-
-"colorschemes
-Bundle "arcticicestudio/nord-vim"
-
+" List ends here. Plugins become visible to Vim after this call.
+call plug#end()
 
 
 let g:coc_global_extensions = [
@@ -70,6 +59,8 @@ if has("autocmd")
   autocmd BufNewFile,BufRead *.json set ft=javascript
   au BufNewFile,BufRead *.cljs set filetype=clojure
 
+  "autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+  "autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 
 endif
 if &t_Co > 2 || has("gui_running")
@@ -79,22 +70,14 @@ endif
 
 if has("gui_running")
   set guioptions=egmrt
-  colo solarized
+  colo seoul256
   set background=light
 else
   set term=xterm
   set t_Co=256
-  colo solarized
+  colo seoul256
   set background=dark
 endif
-
-" Reselect visual block after indent:
-"vnoremap < <gv
-"vnoremap > >gv
-
-
-" https://github.com/junegunn/fzf
-"set rtp+=/usr/local/Cellar/fzf/0.9.11
 
 
 " Make Y behave like other capitals
@@ -189,22 +172,15 @@ nnoremap <Down>  : echoe "Use j"<CR>
 " =========================
 " plugins
 nmap <leader>n :NERDTree<CR>
-nmap <leader>r :CommandTJump<CR>
 nmap <leader>gb :Git blame<CR>
 
 let g:jsx_ext_required = 0
 
-" ctrlp.vim folder ignore
-
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-"set wildignore+=js/*
 set wildignore+=*.pyc
 set wildignore+=*.class
 set wildignore+=*.png
@@ -214,23 +190,10 @@ set wildignore+=*/node_modules/*
 
 let g:CommandTWildIgnore=&wildignore . ",*/node_modules"
 
-let g:slime_target = "tmux"
-
-"au BufNewFile,BufRead *.py
-    "\ set tabstop=4
-    "\ set softtabstop=4
-    "\ set shiftwidth=4
-    "\ set textwidth=79
-    "\ set expandtab
-    "\ set autoindent
-    "\ set fileformat=unix
-
-"au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-"set encoding=utf-8
-
-
 
 nmap <leader>f :PrettierAsync<CR>
+nmap <leader>t :GFiles<CR>
+nmap <leader>b :Buffers<CR>
 
 if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
   let g:coc_global_extensions += ['coc-prettier']
@@ -256,21 +219,4 @@ inoremap <silent><expr> <C-i> coc#refresh()
 
 nnoremap <silent> K :call CocAction('doHover')<CR>
 
-
-
-"function! ShowDocIfNoDiagnostic(timer_id)
-  "if (coc#float#has_float() == 0 && CocHasProvider('hover') == 1)
-    "silent call CocActionAsync('doHover')
-  "endif
-"endfunction
-
-"function! s:show_hover_doc()
-  "call timer_start(500, 'ShowDocIfNoDiagnostic')
-"endfunction
-
-"autocmd CursorHoldI * :call <SID>show_hover_doc()
-"autocmd CursorHold * :call <SID>show_hover_doc()
-
-
-
-
+nnoremap <C-p> :GFiles<Cr>
