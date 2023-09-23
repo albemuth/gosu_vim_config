@@ -3,3 +3,5 @@ vim/.netrwhist
 vim/bundle/
 vim/black/
 vim/vundle.git/
+vim/autoload/
+vim/plugged/
