@@ -22,12 +22,6 @@ Installation:
 
     cp gosu_vim_config/.exports-sample gosu_vim_config/.exports
     
-    git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-    # verify .vimrc vundle path
-    vim
-    # :BundleInstall
-    cd ~/.vim/bundle/command-t/ruby/command-t/ext/command-t
-    ruby extconf.rb && make
-    
-
-
+    sudo apt install fzf
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
