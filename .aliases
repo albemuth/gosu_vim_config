@@ -8,12 +8,17 @@ alias gc='git commit -v'
 alias gca='git commit -v -a'
 alias gb='git branch'
 alias gba='git branch -a'
-alias gco='git checkout '
+alias gco='git checkout'
 alias gx='gitx --all &'
 alias gch='git cherry-pick'
 #alias gk='git log --graph --abbrev-commit --pretty=oneline --decorate'
 alias gk='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
 alias gno='git show --name-only'
+alias gpc='git push --set-upstream origin $(git branch --show-current)'
+
+alias pbcopy='clip.exe'
+alias pbpaste='powershell.exe Get-Clipboard | tr -d "\r"'
+
 
 # VIM!
 alias vv='vim `gst -s | grep "^.M" | sed "s/^...//"`'
@@ -34,3 +39,177 @@ alias gcurl='curl -A "Mozilla/5.0 (Linux; U; Android 2.3.6; en-us; Nexus S Build
 alias nn='NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'  # This loads nvm
 
 alias ag='ag --path-to-ignore ~/.ignore'
+
+#alias pat2b64='node -e "require(\"readline\").createInterface({input:process.stdin,output:process.stdout,historySize:0}).question(\"PAT> \",p => { b64=Buffer.from(p.trim()).toString(\"base64\");console.log(b64);process.exit(); })"'
+alias pat2b64='node -e "process.stdin.on(\"data\", data => { console.log(Buffer.from(data.toString().trim()).toString(\"base64\")); process.exit(); })"'
+
+
+pnpm-pick() {
+    local package_json="package.json"
+    
+    # Check if package.json exists
+    if [[ ! -f "$package_json" ]]; then
+        echo "Error: package.json not found in current directory"
+        return 1
+    fi
+    
+    # Check if jq is available
+    if ! command -v jq &> /dev/null; then
+        echo "Error: jq is required but not installed"
+        return 1
+    fi
+    
+    # Check if fzf is available
+    if ! command -v fzf &> /dev/null; then
+        echo "Error: fzf is required but not installed"
+        return 1
+    fi
+    
+    # Extract scripts from package.json and format for fzf
+    local selected_script
+    selected_script=$(jq -r '.scripts | to_entries[] | "\(.key)\t\(.value)"' "$package_json" | \
+        fzf --delimiter '\t' \
+            --with-nth 1 \
+            --preview 'echo "Script: {1}" && echo "Command: {2..}"' \
+            --preview-window right:60%:wrap \
+            --height 80% \
+            --border \
+            --prompt "Select pnpm script: " \
+            --header "Use / to navigate, Enter to select, Esc to cancel" \
+            --bind 'ctrl-/:toggle-preview')
+    
+    # Check if user made a selection
+    if [[ -n "$selected_script" ]]; then
+        local script_name=$(echo "$selected_script" | cut -f1)
+        local script_command=$(echo "$selected_script" | cut -f2-)
+        
+        echo "Running: pnpm $script_name"
+        echo "Command: $script_command"
+        echo "---"
+        
+        # Execute the selected script
+        pnpm "$script_name"
+    else
+        echo "No script selected"
+    fi
+}
+
+alias pp='pnpm-pick'
+
+
+azpr () {
+        local branch=$(git rev-parse --abbrev-ref HEAD)
+        local tmpfile=$(mktemp /tmp/prmsg.XXXXXX)
+        local organization=$(git config azure.ado.organization)
+        local project=$(git config azure.ado.project)
+        local repository=$(git config azure.ado.repository)
+        
+        echo "Debug: Checking configuration..."
+        echo "  Current branch: $branch"
+        echo "  Organization: ${organization:-'NOT SET'}"
+        echo "  Project: ${project:-'NOT SET'}"
+        echo "  Repository: ${repository:-'NOT SET'}"
+        echo ""
+        
+        # Validate required configuration
+        if [[ -z "$organization" ]]; then
+                echo "Error: Azure ADO organization not configured. Run: git config azure.ado.organization <org>"
+                return 1
+        fi
+        if [[ -z "$project" ]]; then
+                echo "Error: Azure ADO project not configured. Run: git config azure.ado.project <project>"
+                return 1
+        fi
+        if [[ -z "$repository" ]]; then
+                echo "Error: Azure ADO repository not configured. Run: git config azure.ado.repository <repo>"
+                return 1
+        fi
+        
+        echo -e "Title goes here\n\nDescription goes here..." > $tmpfile
+        vim $tmpfile
+        local title=$(head -n1 $tmpfile)
+        local description=$(tail -n +3 $tmpfile)
+        
+        echo "Debug: Validating PR content..."
+        echo "  Title: '$title'"
+        echo "  Description length: ${#description} characters"
+        echo ""
+        
+        # Validate title and description
+        if [[ -z "$title" || "$title" == "Title goes here" ]]; then
+                echo "Error: Please provide a valid PR title"
+                rm $tmpfile
+                return 1
+        fi
+        echo "Debug: Creating PR with the following parameters:"
+        echo "  Branch: $branch"
+        echo "  Title: $title"
+        echo "  Description: $description"
+        echo "  Organization: $organization"
+        echo "  Project: $project"
+        echo "  Repository: $repository"
+        echo ""
+        
+        local response=$(az repos pr create \
+    --source-branch "$branch" \
+    --target-branch main \
+    --title "$title" \
+    --description "$description" \
+    --organization "$organization" \
+    --project "$project" \
+    --repository "$repository" \
+    --output json 2>&1)
+        local exit_code=$?
+        
+        echo "Debug: az command exit code: $exit_code"
+        echo "Debug: Response: $response"
+        echo ""
+        
+        if [[ $exit_code -ne 0 || -z "$response" ]]
+        then
+                echo "Error: Failed to create PR."
+                echo "Exit code: $exit_code"
+                echo "Response: $response"
+                rm $tmpfile
+                return 1
+        fi
+        local pr_id=$(echo "$response" | jq -r .pullRequestId)
+        if [[ -n "$pr_id" && "$pr_id" != "null" ]]
+        then
+                local pr_url="${organization}/DefaultCollection/${project}/_git/${repository}/pullrequest/${pr_id}"
+                echo "PR created successfully: $pr_url"
+        else
+                echo "Error: PR created but couldn't extract PR URL."
+                echo "$response"
+                rm $tmpfile
+                return 1
+        fi
+        rm $tmpfile
+}
+
+
+
+
+
+gnb() {
+    local feature_name
+    
+    if [ $# -eq 0 ]; then
+        # No arguments provided, prompt for feature name
+        echo -n "Enter feature name: "
+        read feature_name
+        if [ -z "$feature_name" ]; then
+            echo "Feature name cannot be empty"
+            return 1
+        fi
+    else
+        # Use the provided argument as feature name
+        feature_name="$1"
+    fi
+    
+    echo "Fetching latest changes..."
+    git fetch || return 1
+    
+    echo "Creating and checking out branch: alfredo/$feature_name"
+    gco -b "alfredo/$feature_name" origin/main
+}

@@ -131,9 +131,16 @@ nnoremap <C-y> 3<C-y>
 nmap <leader>d :set background=light<CR>
 nmap <leader>D :set background=dark<CR>
 
-nmap <leader>p :set paste<CR>
-nmap <leader>P :set nopaste<CR>
-nmap <leader><leader>p :set nopaste<CR>
+
+if system('grep -q Microsoft /proc/version') == 0
+  " Define the custom command only if running inside WSL
+  command! PasteClipboard execute ':r!powershell.exe Get-Clipboard | tr -d "\r"'
+  nnoremap <leader>p :r!powershell.exe Get-Clipboard \| tr -d "\r"<CR>
+else
+  nmap <leader>p :set paste<CR>
+  nmap <leader>P :set nopaste<CR>
+  nmap <leader><leader>p :set nopaste<CR>
+endif
 " Bubble single lines
 nmap <C-K> [e
 nmap <C-J> ]e
@@ -206,8 +213,10 @@ endif
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gr <Plug>(coc-references)
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> [g <Plug>(coc-diagnostic-prev-error)
+nmap <silent> ]g <Plug>(coc-diagnostic-next-error)
+	"|<Plug>(coc-diagnostic-next-error)| jump to next error.
+	"|<Plug>(coc-diagnostic-prev-error)| jump to previous error.
 nmap <leader>do <Plug>(coc-codeaction)
 nmap <leader>dc :CocCommand<CR>
 inoremap <silent><expr> <C-i> coc#refresh()
@@ -222,3 +231,9 @@ nnoremap <silent> K :call CocAction('doHover')<CR>
 nnoremap <C-p> :GFiles<Cr>
 
 
+" Set cursor shape to block in normal mode
+set guicursor=n-v-c:block-Cursor
+" Set cursor shape to bar in insert mode (optional)
+set guicursor+=i:ver25-Cursor
+" Set cursor shape to underline in replace mode (optional)
+set guicursor+=r:hor20-Cursor

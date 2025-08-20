@@ -5,8 +5,8 @@ export CONFIG_DIR=$HOME/gosu_vim_config
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-export ZSH_THEME="robbyrussell"
-#export ZSH_THEME="pygmalion"
+#export ZSH_THEME="robbyrussell"
+export ZSH_THEME="pygmalion"
 
 # Set to this to use case-sensitive completion
 # export CASE_SENSITIVE="true"
@@ -27,10 +27,10 @@ plugins=()
 source $ZSH/oh-my-zsh.sh
 alias sudo='nocorrect sudo'
 
-#function git_prompt_info() {
-  #ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  #echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$ZSH_THEME_GIT_PROMPT_SUFFIX"
-#}
+function git_prompt_info() {
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+  echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$ZSH_THEME_GIT_PROMPT_SUFFIX"
+}
 # Customize to your needs...
 
 bindkey "^[[3~" delete-char
@@ -67,3 +67,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export WIN=/mnt/c/Users/alfredomesn/
+
+
+
+eval $(dircolors ~/.dircolors)
