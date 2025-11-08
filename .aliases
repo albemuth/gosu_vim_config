@@ -7,8 +7,10 @@ alias gd='git diff'
 alias gc='git commit -v'
 alias gca='git commit -v -a'
 alias gb='git branch'
+alias ggb='sh ~/bin/better-git-branch.sh'
 alias gba='git branch -a'
 alias gco='git checkout'
+alias gcof='git checkout `git branch | fzf`'
 alias gx='gitx --all &'
 alias gch='git cherry-pick'
 #alias gk='git log --graph --abbrev-commit --pretty=oneline --decorate'
@@ -34,6 +36,9 @@ alias pjs='xargs -0 node -e "console.log(JSON.stringify(JSON.parse(process.argv[
 alias dotfiles='vim ~/.zshrc $CONFIG_DIR/.aliases $CONFIG_DIR/.exports ~/.profile ~/.zprofile ~/.config/i3/config && source ~/.zshrc'
 alias icurl='curl -A "Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_3_3 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5"'
 alias gcurl='curl -A "Mozilla/5.0 (Linux; U; Android 2.3.6; en-us; Nexus S Build/GRK39F) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"'
+
+alias figmcp="socat TCP-LISTEN:3845,fork TCP:$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):3845"
+
 
 
 alias nn='NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'  # This loads nvm
@@ -94,7 +99,7 @@ pnpm-pick() {
     fi
 }
 
-alias pp='pnpm-pick'
+alias pp='BROWSER="/mnt/c/Program Files/Google/Chrome/Application/chrome.exe" pnpm-pick'
 
 
 azpr () {

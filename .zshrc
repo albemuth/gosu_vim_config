@@ -6,7 +6,10 @@ export CONFIG_DIR=$HOME/gosu_vim_config
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 #export ZSH_THEME="robbyrussell"
-export ZSH_THEME="pygmalion"
+# export ZSH_THEME="pygmalion"
+
+# Custom prompt configuration
+ZSH_THEME=""
 
 # Set to this to use case-sensitive completion
 # export CASE_SENSITIVE="true"
@@ -25,6 +28,19 @@ export DISABLE_AUTO_TITLE="true"
 plugins=()
 
 source $ZSH/oh-my-zsh.sh
+
+# Custom prompt configuration
+autoload -Uz vcs_info
+precmd() { vcs_info }
+
+# Git branch info
+zstyle ':vcs_info:git:*' formats '|%b'
+zstyle ':vcs_info:*' enable git
+
+setopt PROMPT_SUBST
+
+# Custom prompt: folder_name|git_branch $ 
+PROMPT='%F{cyan}%1~%f%F{yellow}${vcs_info_msg_0_}%f %F{green}$%f '
 alias sudo='nocorrect sudo'
 
 function git_prompt_info() {
@@ -71,3 +87,12 @@ export WIN=/mnt/c/Users/alfredomesn/
 
 
 eval $(dircolors ~/.dircolors)
+
+# bun completions
+[ -s "/home/alfredomesen/.bun/_bun" ] && source "/home/alfredomesen/.bun/_bun"
+
+
+# Add to your ~/.bashrc or ~/.zshrc
+export WINDOWS_HOST=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}')
+export GPG_TTY=$(tty)
+alias vp="jq -r '.[now % length]' ~/video-prompts.json | pbcopy"
