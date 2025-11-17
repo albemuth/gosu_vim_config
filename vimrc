@@ -192,7 +192,7 @@ let g:CommandTWildIgnore=&wildignore . ",*/node_modules"
 
 
 nmap <leader>f :PrettierAsync<CR>
-nmap <leader>t :GFiles<CR>
+nmap <leader>t :Files<CR>
 nmap <leader>b :Buffers<CR>
 
 if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
