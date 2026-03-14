@@ -6,7 +6,7 @@ export CONFIG_DIR=$HOME/gosu_vim_config
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 #export ZSH_THEME="robbyrussell"
-# export ZSH_THEME="pygmalion"
+export ZSH_THEME="pygmalion"
 
 # Custom prompt configuration
 ZSH_THEME=""
@@ -65,6 +65,7 @@ fi
 
 
 export EDITOR=vim
+export BROWSER="/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   alias copy='xsel -ib'
   alias pbpaste='xclip -selection clipboard -o'
