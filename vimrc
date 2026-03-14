@@ -1,3 +1,4 @@
+let g:enable_coc = 0
 
 " https://github.com/junegunn/vim-plug/wiki/tutorial
 " Plugins will be downloaded under the specified directory.
@@ -16,7 +17,9 @@ Plug 'kana/vim-smartinput'
 Plug 'leafgarland/typescript-vim'
 Plug 'mattn/emmet-vim'
 Plug 'mxw/vim-jsx'
-Plug 'neoclide/coc.nvim'
+if g:enable_coc
+  Plug 'neoclide/coc.nvim'
+endif
 Plug 'octref/RootIgnore'
 Plug 'pangloss/vim-javascript'
 Plug 'peitalin/vim-jsx-typescript'
@@ -36,11 +39,12 @@ Plug 'tpope/vim-unimpaired'
 call plug#end()
 
 
-let g:coc_global_extensions = [
-  \ 'coc-tsserver'
-  \ ]
-            
-let g:coc_disable_transparent_cursor = 1
+if g:enable_coc
+  let g:coc_global_extensions = [
+    \ 'coc-tsserver'
+    \ ]
+  let g:coc_disable_transparent_cursor = 1
+endif
 
 " ================================================================================
 " ================================================================================
@@ -202,31 +206,31 @@ nmap <leader>f :PrettierAsync<CR>
 nmap <leader>t :GFiles<CR>
 nmap <leader>b :Buffers<CR>
 
-if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
-  let g:coc_global_extensions += ['coc-prettier']
+if g:enable_coc
+  if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
+    let g:coc_global_extensions += ['coc-prettier']
+  endif
+
+  if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+    let g:coc_global_extensions += ['coc-eslint']
+  endif
+
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gr <Plug>(coc-references)
+  nmap <silent> [g <Plug>(coc-diagnostic-prev-error)
+  nmap <silent> ]g <Plug>(coc-diagnostic-next-error)
+  nmap <leader>do <Plug>(coc-codeaction)
+  nmap <leader>dc :CocCommand<CR>
+  inoremap <silent><expr> <C-i> coc#refresh()
+
+  " Make <CR> to accept selected completion item or notify coc.nvim to format
+  " <C-g>u breaks current undo, please make your own choice.
+  "inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                                "\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+  nnoremap <silent> K :call CocAction('doHover')<CR>
 endif
-
-if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
-  let g:coc_global_extensions += ['coc-eslint']
-endif
-
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> [g <Plug>(coc-diagnostic-prev-error)
-nmap <silent> ]g <Plug>(coc-diagnostic-next-error)
-	"|<Plug>(coc-diagnostic-next-error)| jump to next error.
-	"|<Plug>(coc-diagnostic-prev-error)| jump to previous error.
-nmap <leader>do <Plug>(coc-codeaction)
-nmap <leader>dc :CocCommand<CR>
-inoremap <silent><expr> <C-i> coc#refresh()
-
-" Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice.
-"inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              "\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-nnoremap <silent> K :call CocAction('doHover')<CR>
 
 nnoremap <C-p> :GFiles<Cr>
 
