@@ -25,3 +25,9 @@ Installation:
     sudo apt install fzf
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+    # tmux plugin manager
+    ln -s gosu_vim_config/.tmux.conf .tmux.conf
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+    # then inside tmux, press prefix + I to install plugins

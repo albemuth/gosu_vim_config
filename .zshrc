@@ -66,8 +66,5 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-eval "$(pyenv init -)"
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-
-. "$HOME/.local/bin/env"
-
+export AZURE_OPENAI_ENDPOINT="https://alfre-m9k3dy8z-swedencentral.openai.azure.com"
+export AZURE_OPENAI_API_KEY=`cat ~/.foundry-token`
