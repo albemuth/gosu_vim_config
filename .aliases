@@ -69,6 +69,12 @@ pnpm-pick() {
         echo "Error: fzf is required but not installed"
         return 1
     fi
+
+    # Detect package manager: pnpm if lockfile present, else npm
+    local pkg_manager="npm"
+    if [[ -f "pnpm-lock.yaml" ]]; then
+        pkg_manager="pnpm"
+    fi
     
     # Extract scripts from package.json and format for fzf
     local selected_script
@@ -79,7 +85,7 @@ pnpm-pick() {
             --preview-window right:60%:wrap \
             --height 80% \
             --border \
-            --prompt "Select pnpm script: " \
+            --prompt "Select $pkg_manager script: " \
             --header "Use / to navigate, Enter to select, Esc to cancel" \
             --bind 'ctrl-/:toggle-preview')
     
@@ -88,18 +94,19 @@ pnpm-pick() {
         local script_name=$(echo "$selected_script" | cut -f1)
         local script_command=$(echo "$selected_script" | cut -f2-)
         
-        echo "Running: pnpm $script_name"
+        echo "Running: $pkg_manager run $script_name"
         echo "Command: $script_command"
         echo "---"
         
         # Execute the selected script
-        pnpm "$script_name"
+        $pkg_manager run "$script_name"
     else
         echo "No script selected"
     fi
 }
 
-alias pp='BROWSER="/mnt/c/Program Files/Google/Chrome/Application/chrome.exe" pnpm-pick'
+alias pp='nvm use && BROWSER="chromium-browser" pnpm-pick'
+alias usechrome='BROWSER="chromium-browser"'
 
 
 azpr () {
@@ -218,3 +225,15 @@ gnb() {
     echo "Creating and checking out branch: alfredo/$feature_name"
     gco -b "alfredo/$feature_name" origin/main
 }
+
+
+
+alias chromium="chromium-browser"
+alias azdev="BROWSER='chromium-browser' az login --tenant e6f8ac30-2fd5-4173-8392-31b071846feb"
+alias azcorp="az login --tenant 72f988bf-86f1-41af-91ab-2d7cd011db47"
+alias tbranch='tmux rename-session "$(git rev-parse --abbrev-ref HEAD | tr "/" "-")"'
+alias relax="printf '\e]133;D;0\a'"
+alias firefox='"/mnt/c/Program Files/Mozilla Firefox/firefox.exe"'
+
+alias cop='copilot'
+

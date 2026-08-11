@@ -1,5 +1,9 @@
 {
-  "eslint.autoFixOnSave": true,
+  "tsserver.tsdk": "./node_modules/typescript/lib",
+  "eslint.useFlatConfig": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": false
+  },
   "eslint.filetypes": [
     "javascript",
     "javascriptreact",

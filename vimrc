@@ -1,4 +1,4 @@
-let g:enable_coc = 0
+let g:enable_coc = 1
 
 " https://github.com/junegunn/vim-plug/wiki/tutorial
 " Plugins will be downloaded under the specified directory.
@@ -9,7 +9,6 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'arcticicestudio/nord-vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'godlygeek/tabular'
-Plug 'jparise/vim-graphql'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/seoul256.vim'
@@ -44,6 +43,12 @@ if g:enable_coc
     \ 'coc-tsserver'
     \ ]
   let g:coc_disable_transparent_cursor = 1
+
+  " coc.nvim recommended settings to reduce flicker/redraw
+  set updatetime=300
+  set signcolumn=yes
+  set ttimeoutlen=10
+  set lazyredraw
 endif
 
 " ================================================================================
@@ -184,6 +189,7 @@ nnoremap <Down>  : echoe "Use j"<CR>
 " plugins
 nmap <leader>n :NERDTree<CR>
 nmap <leader>gb :Git blame<CR>
+command! Gblame Git blame
 
 let g:jsx_ext_required = 0
 
@@ -203,7 +209,7 @@ let g:CommandTWildIgnore=&wildignore . ",*/node_modules"
 
 
 nmap <leader>f :PrettierAsync<CR>
-nmap <leader>t :GFiles<CR>
+nmap <leader>t :Files<CR>
 nmap <leader>b :Buffers<CR>
 
 if g:enable_coc
@@ -224,10 +230,14 @@ if g:enable_coc
   nmap <leader>dc :CocCommand<CR>
   inoremap <silent><expr> <C-i> coc#refresh()
 
+  " Navigate the completion popup with Ctrl-j / Ctrl-k
+  inoremap <silent><expr> <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
+  inoremap <silent><expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
+
   " Make <CR> to accept selected completion item or notify coc.nvim to format
   " <C-g>u breaks current undo, please make your own choice.
-  "inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                                "\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+  inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                                \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
   nnoremap <silent> K :call CocAction('doHover')<CR>
 endif
@@ -236,8 +246,15 @@ nnoremap <C-p> :GFiles<Cr>
 
 
 " Set cursor shape to block in normal mode
-set guicursor=n-v-c:block-Cursor
-" Set cursor shape to bar in insert mode (optional)
-set guicursor+=i:ver25-Cursor
-" Set cursor shape to underline in replace mode (optional)
-set guicursor+=r:hor20-Cursor
+" Only apply guicursor in GUI Vim — in terminal Vim (esp. inside tmux)
+" the DECSCUSR escape sequences re-emitted on every coc popup redraw
+" cause noticeable cursor flicker.
+if has("gui_running")
+  set guicursor=n-v-c:block-Cursor
+  " Set cursor shape to bar in insert mode (optional)
+  set guicursor+=i:ver25-Cursor
+  " Set cursor shape to underline in replace mode (optional)
+  set guicursor+=r:hor20-Cursor
+else
+  set guicursor=
+endif
